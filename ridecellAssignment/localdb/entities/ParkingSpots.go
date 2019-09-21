@@ -18,7 +18,7 @@ type ParkingSpot struct {
 	Lat  float64
 	Lng  float64
 	Type ParkingSpotType
-	Rate float64
+	Rate string
 	Currency Currency
 	BookingStatus BookingStatus //?? Keep booking status separate when we update we only need to change the booking status.
 }
