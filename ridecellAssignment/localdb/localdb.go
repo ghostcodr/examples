@@ -9,6 +9,7 @@ import (
 
 type db struct {
 	parkingLocations map[string]*entities.City
+	plans map[string]*entities.Plan
 	users map[string]*user.User
 	mux              sync.Mutex
 }
@@ -20,6 +21,9 @@ func GetInstance() *db {
 	once.Do(func() {
 		dbInstance = &db{}
 		dbInstance.parkingLocations = make(map[string]*entities.City)
+		dbInstance.plans=make(map[string]*entities.Plan)
+		plan := &entities.Plan{Id: "per_hour", Name: "Per hour plan", Rate: 20, Unit: 1}
+		dbInstance.plans["per_hour"]= plan
 		city := &entities.City{
 			Id:   "PN001",
 			Name: "Pune",
@@ -35,7 +39,7 @@ func GetInstance() *db {
 									Type:     entities.SMALL,
 									Lat:      18.520430,
 									Lng:      73.856743,
-									Rate:     20,
+									Rate:     "per_hour",
 									Currency: entities.RS,
 									BookingStatus: entities.BookingStatus{
 										Status: entities.AVAILABLE,
@@ -46,7 +50,7 @@ func GetInstance() *db {
 									Type:     entities.SMALL,
 									Lat:      18.530430,
 									Lng:      73.866743,
-									Rate:     20,
+									Rate:     "per_hour",
 									Currency: entities.RS,
 									BookingStatus: entities.BookingStatus{
 										Status: entities.AVAILABLE,
@@ -57,7 +61,7 @@ func GetInstance() *db {
 									Type:     entities.SMALL,
 									Lat:      18.540430,
 									Lng:      73.876743,
-									Rate:     20,
+									Rate:     "per_hour",
 									Currency: entities.RS,
 									BookingStatus: entities.BookingStatus{
 										Status: entities.AVAILABLE,
@@ -68,7 +72,7 @@ func GetInstance() *db {
 									Type:     entities.LARGE,
 									Lat:      18.550430,
 									Lng:      73.886743,
-									Rate:     40,
+									Rate:     "per_hour",
 									Currency: entities.RS,
 									BookingStatus: entities.BookingStatus{
 										Status: entities.AVAILABLE,
